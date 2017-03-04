@@ -9,13 +9,13 @@ void main()
  gets(string);
  for(iterator=0;string[iterator]!='\0';iterator++)
  {
-   if(string[iterator]=='('||string[iterator]=='{'||string[iterator]=='"'||string[iterator]=='\\')
+   if(string[iterator]=='('||string[iterator]=='{'||string[iterator]=='"'||string[iterator]=='\')
    {
      flag=1;
     iterator2= iterator++;
      while(string[iterator]!='\0')
      {
-       if(string[iterator]==')'||string[iterator]=='}'||string[iterator]=='"'||string[iterator]=='\\')
+       if(string[iterator]==')'||string[iterator]=='}'||string[iterator]=='"'||string[iterator]=='\')
        {
 	flag=2;
        }
