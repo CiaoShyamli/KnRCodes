@@ -1,37 +1,56 @@
-#incllude<math.h>/* adding  pow() function */
-
-float atof( char s[] )
+/* Extend atof to handle scientific notation of the form 
+   123.45e-6 where a floating-point number may be followed by e or E and an optionally signed exponent*/
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>/* adding  pow() function */
+float at( char [] );
+void main()
 {
-  double val,power,exp;
-  int i,sign,sign2;
+	char s[100];
+	int index;
+	float value;
+	printf("enter your string = ");
+    gets(s);
+	value = at(s);
+	printf("%f",value);
+	_getch();
+
+}
+
+float at( char s[] )
+{
+	  float val,power,exp;
+	  int i,sign,sign2;
   
   for( i = 0;isspace(s[i]);i++)
   ;
   sign = (s[i]=='-')? -1:1;
- if(s[i] == '+' || s[i] == '-')
+  if(s[i] == '+' || s[i] == '-')
     i++;
- for(val = 0.0;isdigit(s[i]);i++)
- {
-   val = 10.0*val+(s[i] -'0');
- }
- if(s[i] =='.')
- {
-   i++;
-    for(power =1.0;isdigit(s[i]);i++)
-    {
-       val = 10.0 *val+(s[i] - '0');
-       pow *= 10.0;
-    }
-    val *=sign/power;
- }  
+  for(val = 0.0;isdigit(s[i]);i++)
+  {
+	                                    //This is the signature for the isdigit function: it indicates that it will accept an int value (or something that can be cast to int, like a char),
+	   val = 10.0*val+(s[i] -'0');							           //  and will return an int. You cannot, therefore,
+								          // pass it an array (though you can call it on every member of an int[]).								   
+  }
+  if(s[i] =='.')
+  {
+     i++;
+     for(power =1.0;isdigit(s[i]);i++)
+     {
+         val = 10.0 *val+(s[i] - '0');
+         power *= 10.0;
+     }
+     val *=sign/power;
+  }  
   if(s[i]=='e'||s[i]=='E')
   {
     sign2 =  (s[i]=='-')? -1:1;
- if(s[i] == '+' || s[i] == '-')
+    if(s[i] == '+' || s[i] == '-')
     i++;
- for(exp = 0.0;isdigit(s[i]);i++)
-   exp = 10.0*exp+(s[i] -'0');
-   val *= pow(10,sign2 *exp);
+  for(exp = 0.0;isdigit(s[i]);i++)
+     exp = 10.0*exp+(s[i] -'0');
+     val *= pow(10,sign2 *exp);
   } 
    return val;
-    
+}    
