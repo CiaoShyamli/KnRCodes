@@ -1,11 +1,4 @@
-   external variables for push and pop 
-   void push( double f) { ... }   
-   double pop(void) { ... }
-   int getop(char s[]) { ... }
-   routines called by getop Later we will discuss how this might be split into two or more source files. 
-The function main is a loop containing a big switch on the type ofoperator or operand;
- this is a more typical use of switch than the one shown in Section 3.4. 
-   #include <stdio.h> 
+    #include <stdio.h> 
    #include <stdlib.h>  /* for  atof() */
    
    #define MAXOP   100  /* max size of operand or operator */
@@ -13,8 +6,14 @@ The function main is a loop containing a big switch on the type ofoperator or op
    int getop(char []); 
    void push(double); 
    double pop(void);
+  int getch(void);
+  void ungetch(int);
+  int sp = 0;
+   /* next free stack position */   
+   double val[MAXVAL];  /* value stack */
+   /* push:  push f onto value stack */
    /* reverse Polish calculator */ 
-   main() 
+void main() 
    {     
    int type; 
    double op2; 
@@ -68,10 +67,7 @@ The function main is a loop containing a big switch on the type ofoperator or op
 			   
 			     #define MAXVAL  100  /* maximum depth of val stack */
 				 
-   int sp = 0;
-   /* next free stack position */   
-   double val[MAXVAL];  /* value stack */
-   /* push:  push f onto value stack */
+   
    void push(double f) 
    { 
    if (sp < MAXVAL)     
@@ -91,8 +87,6 @@ The function main is a loop containing a big switch on the type ofoperator or op
    }
    }
    
-      int getch(void);
-	  void ungetch(int);
    /* getop:  get next character or numeric operand */  
    int getop(char s[])   
    {
@@ -137,6 +131,7 @@ The function main is a loop containing a big switch on the type ofoperator or op
                 printf("Error: Stack empty.\n");
                 return 0;
    }
+
    int clear(void)
 {
         if (sp > 0) {
