@@ -12,10 +12,7 @@ void main()
 	printf(" Enter integer");
 	scanf("%d",&c);
 	itoa(c);  /* itoa:  convert n to characters in s */
-	while(s[i++]!='\0')
-	{
-  printf("%c",s[i]);
-	}
+	puts(s);
 	_getch();
 }
 
@@ -23,16 +20,13 @@ void main()
  void itoa(int n)   
   {      
   int i, sign;
- if((sign = n) < 0)  /* record sign */ 
- n = -n;          /* make n positive */ 
- i = 0; 
-   if((n /= 10) > 0)
-   {/* generate digits in reverse order */ 
- itoa(s[i++] = n % 10 + '0');  /* get next digit */   
- }
-   else
+  if((sign = n) < 0)  /* record sign */ 
+  n = -n;          /* make n positive */ 
+  i = 0; 
+   if(n>0)
    {
-	   return ;
+	   s[i++] = n % 10 + '0';/* generate digits in reverse order */ 
+       itoa(n /= 10);  /* get next digit */   
    }
  if(sign < 0) 
  s[i++] = '-'; 
@@ -42,7 +36,7 @@ void main()
 
   
    /* reverse:  reverse string s in place */  
-   void reverse(char s[])  
+void reverse(char s[])  
    {      
    int c, i, j;
        for (i = 0, j = strlen(s)-1; i < j; i++, j--) 
